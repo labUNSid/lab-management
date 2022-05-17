@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 
-class Signup extends BaseController
+class Auth extends BaseController
 {
     public function __construct()
     {
@@ -13,6 +13,17 @@ class Signup extends BaseController
     }
 
     public function index()
+    {
+        $data = [
+            'title' => 'Signin | Lab Management',
+        ];
+
+        dd($data);
+
+        return view('signin', $data);
+    }
+
+    public function signup()
     {
         $data = [
             'title' => 'Signup | Lab Management',
@@ -37,9 +48,10 @@ class Signup extends BaseController
             ],
 
             'email' => [
-                'rules' => 'required',
+                'rules' => 'required|is_unique[user.email]',
                 'errors' => [
                     'required' => '{field} harus diisi',
+                    'is_unique' => '{field} sudah terdaftar',
                 ]
             ],
 
@@ -101,7 +113,7 @@ class Signup extends BaseController
             'is_active' => $activation,
         ]);
 
-        session()->setFlashdata('pesan', 'Silahkan melakukan verifikasi pada email anda');
+        session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
 
         return redirect()->to('/');
     }
