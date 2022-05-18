@@ -20,8 +20,43 @@ class Auth extends BaseController
 
         dd($data);
 
-        return view('signin', $data);
+        return view('auth/signin', $data);
     }
+
+    public function login()
+    {
+        $email = $this->request->getVar('email');
+        $password = sha1($this->request->getVar('password'));
+        $dataUser = $this->userModel->where(['email' => $email])->first();
+
+        // dd($dataUser);
+
+        if ($dataUser) {
+            if ($dataUser['is_active'] == 1) {
+                if ($password == $dataUser['password']) {
+                    session()->set([
+                        // 'email' => $dataUser['email'],
+                        'nama' => $dataUser['nama'],
+                        'member' => $dataUser['member'],
+                        'id_role' => $dataUser['id_role'],
+                    ]);
+                    // return redirect()->to('/user');
+                    // dd(session()->get());
+                    echo ('Selamat datang ' . session()->get('nama'));
+                } else {
+                    session()->setFlashdata('pesan', 'password yang dimasukkan salah');
+                    return redirect()->to('/auth');
+                }
+            } else {
+                session()->setFlashdata('pesan', 'email belum diverivikasi');
+                return redirect()->to('/auth');
+            }
+        } else {
+            session()->setFlashdata('pesan', 'email tidak ditemukan');
+            return redirect()->to('/auth');
+        }
+    }
+
 
     public function signup()
     {
@@ -30,7 +65,7 @@ class Auth extends BaseController
             'validation' => \Config\Services::validation(),
         ];
 
-        dd($data);
+        // dd($data);
 
         return view('signup', $data);
     }
@@ -56,10 +91,10 @@ class Auth extends BaseController
             ],
 
             'password' => [
-                'rules' => 'required|min_length[8]|max_length[20]',
+                'rules' => 'required|min_length[4]|max_length[20]',
                 'errors' => [
                     'required' => '{field} harus diisi',
-                    'min_length' => '{field} minimal 8 karakter',
+                    'min_length' => '{field} minimal 4 karakter',
                     'max_length' => '{field} maksimal 20 karakter'
                 ]
             ],
@@ -81,7 +116,7 @@ class Auth extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
-            return redirect()->to('/signup')->withInput()->with('validation', $validation);
+            return redirect()->to('/auth')->withInput()->with('validation', $validation);
         }
 
         // upload gambar
@@ -102,6 +137,8 @@ class Auth extends BaseController
         //default aktivasi email semantara true
         $activation = 1;
 
+        // dd($this->request->getVar());
+
         //upload ke database
         $this->userModel->save([
             'id_role' => $role,
@@ -115,6 +152,12 @@ class Auth extends BaseController
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
 
-        return redirect()->to('/');
+        return redirect()->to('/auth');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        echo ('pintu keluar');
     }
 }
