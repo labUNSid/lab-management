@@ -18,9 +18,9 @@ class Auth extends BaseController
             'title' => 'Signin | Lab Management',
         ];
 
-        dd($data);
+        // dd($data);
 
-        return view('auth/signin', $data);
+        return view('auth/login', $data);
     }
 
     public function login()
@@ -67,7 +67,7 @@ class Auth extends BaseController
 
         // dd($data);
 
-        return view('signup', $data);
+        return view('auth/sign_up', $data);
     }
 
     public function save()
@@ -105,28 +105,13 @@ class Auth extends BaseController
                     'matches' => 'Password tidak sama',
                 ]
             ],
-            'avatar' => [
-                'rules' => 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Gambar terlalu besar',
-                    'is_image' => 'file tidak sesuai',
-                    'mime_in' => 'file tidak sesuai'
-                ]
-            ]
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
             return redirect()->to('/auth')->withInput()->with('validation', $validation);
         }
 
-        // upload gambar
-        if ($this->request->getFile('avatar')->getName() != '') {
-            $avatar = $this->request->getFile('avatar');
-            $namaAvatar = $avatar->getRandomName();
-            $avatar->move(ROOTPATH . 'public/img/profile', $namaAvatar);
-        } else {
-            $namaAvatar = 'default.jpg';
-        }
+        $namaAvatar = 'default.jpg';
 
         //default member adalah non civitas
         $member = 'non-civitas';
