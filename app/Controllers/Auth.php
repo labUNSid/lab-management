@@ -35,13 +35,20 @@ class Auth extends BaseController
             if ($dataUser['is_active'] == 1) {
                 if ($password == $dataUser['password']) {
                     session()->set([
-                        // 'email' => $dataUser['email'],
+                        'email' => $dataUser['email'],
                         'nama' => $dataUser['nama'],
                         'member' => $dataUser['member'],
                         'id_role' => $dataUser['id_role'],
                     ]);
+
                     // return redirect()->to('/user');
                     // dd(session()->get());
+                    if ($dataUser['id_role'] == 1) {
+                        return redirect()->to('/admin');
+                    }
+                    if ($dataUser['id_role'] == 2) {
+                        return redirect()->to('/user');
+                    }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
                     session()->setFlashdata('pesan', 'password yang dimasukkan salah');
@@ -49,6 +56,7 @@ class Auth extends BaseController
                 }
             } else {
                 session()->setFlashdata('pesan', 'email belum diverivikasi');
+                // echo ('belum verifikasi');
                 return redirect()->to('/auth');
             }
         } else {
@@ -120,12 +128,12 @@ class Auth extends BaseController
         $role = 2;
 
         //default aktivasi email semantara true
-        $activation = 1;
+        $activation = 0;
 
         // dd($this->request->getVar());
 
         //upload ke database
-        $this->userModel->save([
+        $data = [
             'id_role' => $role,
             'nama' => $this->request->getVar('nama'),
             'email' => $this->request->getVar('email'),
@@ -133,7 +141,11 @@ class Auth extends BaseController
             'member' => $member,
             'avatar' => $namaAvatar,
             'is_active' => $activation,
-        ]);
+        ];
+
+        $this->userModel->save($data);
+
+        // $this->sendEmail();
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
 
