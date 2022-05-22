@@ -18,9 +18,9 @@ class Auth extends BaseController
             'title' => 'Signin | Lab Management',
         ];
 
-        dd($data);
+        // dd($data);
 
-        return view('auth/signin', $data);
+        return view('auth/login', $data);
     }
 
     public function login()
@@ -35,13 +35,20 @@ class Auth extends BaseController
             if ($dataUser['is_active'] == 1) {
                 if ($password == $dataUser['password']) {
                     session()->set([
-                        // 'email' => $dataUser['email'],
+                        'email' => $dataUser['email'],
                         'nama' => $dataUser['nama'],
                         'member' => $dataUser['member'],
                         'id_role' => $dataUser['id_role'],
                     ]);
+
                     // return redirect()->to('/user');
                     // dd(session()->get());
+                    if ($dataUser['id_role'] == 1) {
+                        return redirect()->to('/admin');
+                    }
+                    if ($dataUser['id_role'] == 2) {
+                        return redirect()->to('/user');
+                    }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
                     session()->setFlashdata('pesan', 'password yang dimasukkan salah');
@@ -49,6 +56,7 @@ class Auth extends BaseController
                 }
             } else {
                 session()->setFlashdata('pesan', 'email belum diverivikasi');
+                // echo ('belum verifikasi');
                 return redirect()->to('/auth');
             }
         } else {
@@ -67,7 +75,7 @@ class Auth extends BaseController
 
         // dd($data);
 
-        return view('signup', $data);
+        return view('auth/sign_up', $data);
     }
 
     public function save()
@@ -105,28 +113,13 @@ class Auth extends BaseController
                     'matches' => 'Password tidak sama',
                 ]
             ],
-            'avatar' => [
-                'rules' => 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Gambar terlalu besar',
-                    'is_image' => 'file tidak sesuai',
-                    'mime_in' => 'file tidak sesuai'
-                ]
-            ]
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
             return redirect()->to('/auth')->withInput()->with('validation', $validation);
         }
 
-        // upload gambar
-        if ($this->request->getFile('avatar')->getName() != '') {
-            $avatar = $this->request->getFile('avatar');
-            $namaAvatar = $avatar->getRandomName();
-            $avatar->move(ROOTPATH . 'public/img/profile', $namaAvatar);
-        } else {
-            $namaAvatar = 'default.jpg';
-        }
+        $namaAvatar = 'default.jpg';
 
         //default member adalah non civitas
         $member = 'non-civitas';
@@ -135,12 +128,12 @@ class Auth extends BaseController
         $role = 2;
 
         //default aktivasi email semantara true
-        $activation = 1;
+        $activation = 0;
 
         // dd($this->request->getVar());
 
         //upload ke database
-        $this->userModel->save([
+        $data = [
             'id_role' => $role,
             'nama' => $this->request->getVar('nama'),
             'email' => $this->request->getVar('email'),
@@ -148,7 +141,11 @@ class Auth extends BaseController
             'member' => $member,
             'avatar' => $namaAvatar,
             'is_active' => $activation,
-        ]);
+        ];
+
+        $this->userModel->save($data);
+
+        // $this->sendEmail();
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
 
