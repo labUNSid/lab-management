@@ -51,7 +51,7 @@ class Auth extends BaseController
                     }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
-                    session()->setFlashdata('pesan', 'password yang dimasukkan salah');
+                    session()->setFlashdata('pesan', 'assword yang dimasukkan salah');
                     return redirect()->to('/auth');
                 }
             } else {
@@ -116,7 +116,7 @@ class Auth extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
-            return redirect()->to('/auth')->withInput()->with('validation', $validation);
+            return redirect()->to('/auth/signup')->withInput()->with('validation', $validation);
         }
 
         $namaAvatar = 'default.jpg';
