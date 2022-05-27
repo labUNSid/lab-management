@@ -139,8 +139,8 @@ class Auth extends BaseController
             'email' => $this->request->getVar('email'),
             'password' => sha1($this->request->getVar('password')),
             'member' => $member,
-            'avatar' => $namaAvatar,
             'is_active' => $activation,
+            'avatar' => $namaAvatar,
         ];
 
         $this->userModel->save($data);
