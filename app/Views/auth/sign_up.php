@@ -26,49 +26,47 @@
 
       <form action="/auth/save" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Name" name="nama">
-          <?= $validation->getError('nama'); ?>
+          <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" value="<?= old('nama'); ?>" placeholder="Name" name="nama">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
+          <div class="invalid-feedback"><?= $validation->getError('nama'); ?></div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+        <input type="text" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" value="<?= old('email'); ?>" placeholder="Email" name="email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+          <div class="invalid-feedback"><?= $validation->getError('email'); ?></div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" value="<?= old('password'); ?>" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <div class="invalid-feedback"><?= $validation->getError('password'); ?></div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password" name="password_conf">
+        <input type="password" class="form-control <?= ($validation->hasError('password_conf')) ? 'is-invalid' : ''; ?>" placeholder="Retype Password" name="password_conf">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <div class="invalid-feedback"><?= $validation->getError('password_conf'); ?></div>
         </div>
         <div class="input-group mb-3">
           <input type="hidden" name="avatar" value="">
         </div>
         <div class="row">
           <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
-            </div>
+          <a href="/auth/login" class="text-center">I already have a membership</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -77,8 +75,6 @@
           <!-- /.col -->
         </div>
       </form>
-
-      <a href="/auth/signup" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
