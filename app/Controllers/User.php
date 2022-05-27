@@ -43,7 +43,8 @@ class User extends BaseController
             'list' => $this->list_profile,
             'validation' => \Config\Services::validation(),
         ];
-        dd($data);
+        // dd($data);
+        return view('user/edit_profile', $data);
     }
 
     public function update()
