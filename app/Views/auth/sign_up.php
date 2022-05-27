@@ -44,7 +44,7 @@
           <div class="invalid-feedback"><?= $validation->getError('email'); ?></div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" value="<?= old('password'); ?>" placeholder="Password" name="password">
+          <input type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
