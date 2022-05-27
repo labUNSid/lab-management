@@ -66,7 +66,7 @@
         </div>
         <div class="row">
           <div class="col-8">
-          <a href="/auth/login" class="text-center">I already have a membership</a>
+          <a href="/auth" class="text-center">I already have a membership</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -82,10 +82,10 @@
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="<?php echo base_url('../AdminLTE/plugins/jquery/jquery.min.js')?>"></script>
+<script src="<?php echo base_url('AdminLTE/plugins/jquery/jquery.min.js')?>"></script>
 <!-- Bootstrap 4 -->
-<script src="<?php echo base_url('../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+<script src="<?php echo base_url('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo base_url('../AdminLTE/dist/js/adminlte.min.js')?>"></script>
+<script src="<?php echo base_url('AdminLTE/dist/js/adminlte.min.js')?>"></script>
 </body>
 </html>
