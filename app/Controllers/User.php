@@ -25,7 +25,7 @@ class User extends BaseController
     {
         echo ('Selamat datang ' . session()->get('email'));
         // echo get_cookie('key');
-        // return view('user/dashboard');
+        return view('user/dashboard');
     }
 
     public function profile()
@@ -40,6 +40,7 @@ class User extends BaseController
     public function edit()
     {
         $data = [
+            'title' => 'Edit Profile',
             'list' => $this->list_profile,
             'validation' => \Config\Services::validation(),
         ];
@@ -72,6 +73,26 @@ class User extends BaseController
                 ]
             ],
         ])) {
+            $validation = \Config\Services::validation();
+            // dd($validation);
+            return redirect()->to('/user/edit')->withInput()->with('validation', $validation);
         }
+
+        if ($this->request->getFile('avatar')->getName() != '') {
+            $avatar = $this->request->getFile('avatar');
+            $namaavatar = $avatar->getRandomName();
+            $avatar->move(ROOTPATH . 'public/img/profile', $namaavatar);
+        } else {
+            $namaavatar = 'default.jpg';
+        }
+
+        $this->usermodel->save([
+            'nama' => $this->request->getVar('nama'),
+            'email' => $this->request->getVar('email'),
+            'avatar' => $namaavatar
+        ]);
+
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah');
+        return redirect()->to('/user');
     }
 }
