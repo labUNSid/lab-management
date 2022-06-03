@@ -51,16 +51,16 @@ class Auth extends BaseController
                     }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
-                    session()->setFlashdata('pesan', 'assword yang dimasukkan salah');
+                    session()->setFlashdata('pesan', 'Password yang dimasukkan salah');
                     return redirect()->to('/auth');
                 }
             } else {
-                session()->setFlashdata('pesan', 'email belum diverivikasi');
+                session()->setFlashdata('pesan', 'Email belum diverivikasi');
                 // echo ('belum verifikasi');
                 return redirect()->to('/auth');
             }
         } else {
-            session()->setFlashdata('pesan', 'email tidak ditemukan');
+            session()->setFlashdata('pesan', 'Email tidak ditemukan');
             return redirect()->to('/auth');
         }
     }
