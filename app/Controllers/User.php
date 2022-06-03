@@ -72,6 +72,21 @@ class User extends BaseController
                 ]
             ],
         ])) {
+            $validation = \Config\Services::validation();
+            // dd($validation);
+            return redirect()->to('/user/edit/')->withInput()->with('validation', $validation);
         }
+        $this->usermodel->save([
+            'id_user' => $this->request->getVar('id_user'),
+            'id_role' => $this->request->getVar('id_role'),
+            'nama' => $this->request->getVar('nama'),
+            'username' => $this->request->getVar('username'),
+            'id_user' => $this->request->getVar('role'),
+            'password' => $this->request->getVar('password'),
+            'member' => $this->request->getVar('member'),
+            'avatar' => $this->request->getVar('avatar'),
+        ]);
+        session()->setFlashdata('pesan', 'data berhasil diubah');
+        return redirect()->to('/user');
     }
 }
