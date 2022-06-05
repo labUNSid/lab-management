@@ -40,6 +40,7 @@ $routes->group("user", ["filter" => "auth"], function ($routes) {
     $routes->get("/", "User::index");
 });
 
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
