@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\LaboratoriumModel;
+use App\Models\FasilitasModel;
 
 class Admin extends BaseController
 {
@@ -16,6 +17,7 @@ class Admin extends BaseController
         }
         $this->userModel = new UserModel;
         $this->labModel = new LaboratoriumModel;
+        $this->fasilitasModel = new FasilitasModel;
     }
 
     public function index()
@@ -158,5 +160,63 @@ class Admin extends BaseController
 
         session()->setFlashdata('pesan', 'data berhasil diubah');
         return redirect()->to('/admin/editlab/' . $id);
+    }
+
+    public function managefasilitas()
+    {
+        $data = [
+            'title' => 'Management Lab | Management Fasilitas',
+            'list' => $this->fasilitasModel->getFasilitas()->findAll(),
+
+        ];
+        dd($data);
+    }
+
+    public function createfasilitas()
+    {
+        $data = [
+            'title' => 'Management Lab | Create Fasilitas',
+            'validation' => \Config\Services::validation(),
+            'list_lab' => $this->labModel->findAll()
+        ];
+        dd($data);
+    }
+
+    public function savefasilitas()
+    {
+        if (!$this->validate([
+            'nama_barang' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'min_length' => '{field} minimal 3 huruf'
+                ]
+            ],
+            'id_lab' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                ]
+            ],
+            'quantity' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'numeric' => '{field} harus berisi angka'
+                ]
+            ],
+        ])) {
+            $validation = \Config\Services::validation();
+            // dd($validation);
+            return redirect()->to('/admin/managefasilitas')->withInput()->with('validation', $validation);
+        }
+        $this->fasilitasModel->save([
+            'nama_barang' => $this->request->getVar('nama_barang'),
+            'id_lab' => $this->request->getVar('id_lab'),
+            'quantity' => $this->request->getVar('quantity')
+        ]);
+
+        session()->setFlashdata('pesan', 'data berhasil ditambahkan');
+        return redirect()->to('/admin/managefasilitas');
     }
 }
