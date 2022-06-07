@@ -18,40 +18,36 @@
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <section class="section-preview">
-            </section>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <input class="custom-file-input" type="file"></button>
-                </div>
-            </div>
-        </div>
+        
         <div class="col-xl-8">
             <!-- Account details card-->
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form>
+                    <form action="/user/update" method="POST">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputUsername">Nama (how your name will appear to other users on the site)</label>
-                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
+                            <label class="small mb-1" for="nama">Nama </label>
+                            <input class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="inputUsername" type="text" placeholder="Enter your username" name="nama" value="<?= (old('nama')) ? old('nama') : $list[0]['nama']; ?>">
+                            <div class="invalid-feedback"><?= $validation->getError('nama'); ?></div>
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                            <label class="small mb-1" for="email">Email address</label>
+                            <input class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="inputEmailAddress" type="email" placeholder="Enter your email address" name="email" value="<?= (old('email')) ? old('email') : $list[0]['email']; ?>">
+                            <div class="invalid-feedback"><?= $validation->getError('email'); ?></div>
                         </div>
-                        <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button">Save changes</button>
+                        <div class="mb-3">
+                            <!--
+                                <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                             Profile picture help block
+                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                            Profile picture upload button
+                            -->
+                            <input type="file" id="ava" name="avatar" class="form-control" />
+                        </div>
+
+                            <button type="submit" class="btn btn-primary mb-4">Update Data</button>
                     </form>
                 </div>
             </div>
