@@ -4,11 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LaboratoriumModel extends Model
+class FasilitasModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'laboratorium';
-    protected $primaryKey       = 'id_lab';
+    protected $table            = 'fasilitas_laboratorium';
+    protected $primaryKey       = 'id_barang';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
@@ -39,4 +39,9 @@ class LaboratoriumModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getFasilitas()
+    {
+        return $this->table('fasilitas_laboratorium')->join('laboratorium', 'fasilitas_laboratorium.id_lab = laboratorium.id_lab');
+    }
 }
