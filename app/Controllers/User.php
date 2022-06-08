@@ -76,16 +76,29 @@ class User extends BaseController
             // dd($validation);
             return redirect()->to('/user/edit/')->withInput()->with('validation', $validation);
         }
-        $this->userModel->save([
+
+        // dd($this->request->getFile('avatar'));
+
+        if ($this->request->getFile('avatar')->getName() != '') {
+            $avatar = $this->request->getFile('avatar');
+            $namaavatar = $avatar->getRandomName();
+            $avatar->move(ROOTPATH . 'public/img/', $namaavatar);
+        } else {
+            $namaavatar = 'default.jpg';
+        }
+
+        $data = [
             'id_user' => $this->request->getVar('id_user'),
             'id_role' => $this->request->getVar('id_role'),
             'nama' => $this->request->getVar('nama'),
-            'username' => $this->request->getVar('username'),
-            'id_user' => $this->request->getVar('role'),
+            'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'member' => $this->request->getVar('member'),
-            'avatar' => $this->request->getVar('avatar'),
-        ]);
+            'avatar' => $namaavatar,
+            'is_active' => $this->request->getVar('is_active')
+        ];
+        dd($data);
+        $this->userModel->save($data);
         session()->setFlashdata('pesan', 'data berhasil diubah');
         return redirect()->to('/user');
     }
