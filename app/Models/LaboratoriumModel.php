@@ -14,7 +14,7 @@ class LaboratoriumModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_lab', 'harga_lab'];
 
     // Dates
     protected $useTimestamps = true;
