@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row">
                         <h2>Tambah Anggota</h2>
-                        <form action="savelab" method="post" enctype="multipart/form-data">
+                        <form action="/admin/savelab" method="post">
                             <?= csrf_field(); ?>
                             <div class="row mb-4">
                                 <div class="col">

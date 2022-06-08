@@ -22,8 +22,8 @@ class Admin extends BaseController
 
     public function index()
     {
-        echo ('Selamat datang ' . session()->get('nama'));
-        return view('admin/dashboard');
+        // echo ('Selamat datang ' . session()->get('nama'));
+        return view('dashboard');
     }
 
     public function manageuser()
@@ -80,9 +80,9 @@ class Admin extends BaseController
             'title' => 'Management Lab | Manage Lab',
             'list' => $this->labModel->findAll(),
         ];
-        dd($data);
+        // dd($data);
 
-        return view('admin/manage_lab', $data);
+        return view('admin/lab/managelab', $data);
     }
 
     public function createlab()
@@ -91,8 +91,8 @@ class Admin extends BaseController
             'title' => 'Management Lab | Tambah Lab',
             'validation' => \Config\Services::validation(),
         ];
-        dd($data);
-        return view('admin/create_lab', $data);
+        // dd($data);
+        return view('admin/lab/tambah', $data);
     }
 
     public function savelab()
@@ -116,10 +116,11 @@ class Admin extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
-            return redirect()->to('/auth/signup')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/createlab')->withInput()->with('validation', $validation);
         }
+        // dd($this->request->getVar('nama_lab'));
 
-        $this->userModel->save([
+        $this->labModel->save([
             'nama_lab' => $this->request->getVar('nama_lab'),
             'harga_lab' => $this->request->getVar('harga_lab'),
         ]);
@@ -135,8 +136,8 @@ class Admin extends BaseController
             'title' => 'Management Lab | Tambah Lab',
             'list' => $this->labModel->getWhere(['id_lab' => $id])->getResultArray(),
         ];
-        dd($data);
-        return view('admin/detail_lab');
+        // dd($data);
+        return view('admin/lab/detail', $data);
     }
 
     public function editlab($id)
