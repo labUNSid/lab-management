@@ -24,7 +24,7 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form action="/user/update" method="POST">
+                    <form action="/user/update" method="POST"  enctype="multipart/form-data">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="nama">Nama </label>

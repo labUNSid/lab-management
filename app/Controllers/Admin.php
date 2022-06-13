@@ -78,9 +78,9 @@ class Admin extends BaseController
             'title' => 'Management Lab | Manage Lab',
             'list' => $this->labModel->findAll(),
         ];
-        dd($data);
+        // dd($data);
 
-        return view('admin/manage_lab', $data);
+        return view('admin/lab/managelab', $data);
     }
 
     public function createlab()
@@ -89,8 +89,8 @@ class Admin extends BaseController
             'title' => 'Management Lab | Tambah Lab',
             'validation' => \Config\Services::validation(),
         ];
-        dd($data);
-        return view('admin/create_lab', $data);
+        // dd($data);
+        return view('admin/lab/tambah', $data);
     }
 
     public function savelab()

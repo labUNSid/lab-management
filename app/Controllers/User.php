@@ -76,7 +76,7 @@ class User extends BaseController
             // dd($validation);
             return redirect()->to('/user/edit/')->withInput()->with('validation', $validation);
         }
-        $this->usermodel->save([
+        $this->userModel->save([
             'id_user' => $this->request->getVar('id_user'),
             'id_role' => $this->request->getVar('id_role'),
             'nama' => $this->request->getVar('nama'),

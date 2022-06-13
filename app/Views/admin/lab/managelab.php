@@ -17,9 +17,22 @@
                 <td><?= $item['nama_lab'] ?></td>
                 <td><?= $item['harga_lab'] ?></td>
                 <td>
-                    <a class="btn btn-success" href="#/<?= $item['id_lab'] ?>" class="btn btn-success">Detail</a>
+                    <a class="btn btn-success" href="#" onclick="edit(<?= $item['id_lab'] ?>)" class="btn btn-success">Detail</a>
                 </td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
+
+    <script>
+        function edit(id) {
+                $.ajax({
+                    url: "<?= base_url('/user/form') ?>/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        $('#viewmodal').html(response.data).show();
+                        $('#editmodal').modal('show');
+                    }
+                });
+            }
+    </script>
