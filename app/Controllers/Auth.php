@@ -37,7 +37,7 @@ class Auth extends BaseController
                     session()->set([
                         'email' => $dataUser['email'],
                         'nama' => $dataUser['nama'],
-                        'member' => $dataUser['member'],
+                        'id' => $dataUser['id_user'],
                         'id_role' => $dataUser['id_role'],
                     ]);
 
@@ -51,7 +51,7 @@ class Auth extends BaseController
                     }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
-                    session()->setFlashdata('pesan', 'Password yang dimasukkan salah');
+                    session()->setFlashdata('pesan', 'Email atau Password yang dimasukkan salah');
                     return redirect()->to('/auth');
                 }
             } else {
@@ -155,6 +155,6 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
-        echo ('pintu keluar');
+        return redirect()->to('/');
     }
 }
