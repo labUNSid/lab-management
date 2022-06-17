@@ -12,11 +12,11 @@
                             <table class="table table-striped">
                                 <tr>
                                     <td>Nama Lab</td>
-                                    <td> <?= $item[0]['nama_lab'] ?></td>
+                                    <td> <?= $list[0]['nama_lab'] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Harga Lab</td>
-                                    <td> <?= $item[0]['harga_lab'] ?></td>
+                                    <td> <?= $list[0]['harga_lab'] ?></td>
                                 </tr>
                         </div>
                     </div>

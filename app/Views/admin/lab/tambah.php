@@ -1,3 +1,4 @@
+
             <div class="card">
                 <div class="card-header py-3">
                     <h5 class="mb-0 text-center"><strong>Lab</strong>PTIK</h5>
@@ -5,7 +6,7 @@
                 <div class="card-body">
                     <div class="row">
                         <h2>Tambah Anggota</h2>
-                        <form action="/admin/savelab" method="post">
+                        <form action="/admin/updatelab" method="post">
                             <?= csrf_field(); ?>
                             <div class="row mb-4">
                                 <div class="col">

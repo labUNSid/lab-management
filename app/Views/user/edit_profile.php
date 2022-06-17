@@ -26,7 +26,12 @@
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
-                        <form action="/user/update" method="POST">
+                        <form action="/user/update" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id_user" value="<?= $list[0]['id_user']; ?>">
+                        <input type="hidden" name="id_role" value="<?= $list[0]['id_role']; ?>">
+                        <input type="hidden" name="password" value="<?= $list[0]['password']; ?>">
+                        <input type="hidden" name="member" value="<?= $list[0]['member']; ?>">
+                        <input type="hidden" name="is_active" value="<?= $list[0]['is_active']; ?>">
                             <!-- Form Group (username)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="nama">Nama </label>
