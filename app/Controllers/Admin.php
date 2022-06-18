@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\LaboratoriumModel;
 use App\Models\FasilitasModel;
+use App\Models\ReservasiModel;
 
 class Admin extends BaseController
 {
@@ -18,6 +19,7 @@ class Admin extends BaseController
         $this->userModel = new UserModel;
         $this->labModel = new LaboratoriumModel;
         $this->fasilitasModel = new FasilitasModel;
+        $this->reservasiModel = new ReservasiModel;
     }
 
     public function index()
@@ -338,9 +340,25 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Management Lab | Edit Fasilitas',
+            'list' => $this->reservasiModel->getData()->getResultArray(),
             'nav' => 'reservasi',
         ];
-        dd($data);
-        return view('admin/fasilitas/edit', $data);
+        // dd($data);
+        return view('admin/reservasi/manage', $data);
+    }
+
+    public function updatereservasi($id)
+    {
+        $data = [
+            'id' => $id,
+            'id_user' => $this->request->getVar('id_user'),
+            'id_lab' => $this->request->getVar('id_lab'),
+            'waktu_awal' => $this->request->getVar('waktu_awal'),
+            'waktu_akhir' => $this->request->getVar('waktu_akhir'),
+            'is_accept' => $this->request->getVar('is_accept')
+        ];
+        // dd($data);
+        $this->reservasiModel->save($data);
+        return redirect()->to('/admin/managereservasi');
     }
 }
