@@ -2,8 +2,20 @@
 
 <?= $this->section('kontainer'); ?>
 <!-- Mulai disini -->
-<a href="/admin/createfasilitas" class="btn btn-success"><i style="width:18px;height:18px;" class="me-1" data-feather="plus"></i>Tambah Fasilitas</a>
-<table class="table table-hover">
+
+<h1>Daftar Fasilitas</h1>
+<a href="/admin/createfasilitas" class="btn btn-success mb-2"><i style="width:18px;height:18px;" class="me-1" data-feather="plus"></i>Tambah Fasilitas</a>
+<?php if (session()->getFlashdata('pesan')) : ?>
+    <div class="col-4">
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert-message">
+                <?= session()->getFlashdata('pesan'); ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">No</th>
@@ -24,7 +36,7 @@
                 <td><?= $item['nama_lab'] ?></td>
                 <td><?= $item['quantity'] ?></td>
                 <td>
-                    <a href="" class="btn btn-primary">Detail</a>
+                    <a href="/admin/detailfasilitas/<?= $item['id_barang']; ?>" class="btn btn-primary">Detail</a>
                 </td>
             </tr>
         <?php } ?>

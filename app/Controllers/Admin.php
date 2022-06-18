@@ -195,7 +195,7 @@ class Admin extends BaseController
         ];
         $this->labModel->save($data);
 
-        session()->setFlashdata('pesan', 'data berhasil diubah');
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
         return redirect()->to('/admin/detaillab/' . $id);
     }
 
@@ -218,6 +218,17 @@ class Admin extends BaseController
         return view('admin/fasilitas/manage', $data);
     }
 
+    public function detailfasilitas($id)
+    {
+        $data = [
+            'title' => 'Management Lab | Management Fasilitas',
+            'list' => $this->fasilitasModel->getFasilitas()->where('id_barang', $id)->first(),
+            'nav' => 'fasilitas',
+        ];
+        // dd($data);
+        return view('admin/fasilitas/detail', $data);
+    }
+
     public function createfasilitas()
     {
         $data = [
@@ -236,14 +247,8 @@ class Admin extends BaseController
             'nama_barang' => [
                 'rules' => 'required|min_length[3]',
                 'errors' => [
-                    'required' => '{field} harus diisi',
+                    'required' => 'nama barang harus diisi',
                     'min_length' => '{field} minimal 3 huruf'
-                ]
-            ],
-            'id_lab' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi',
                 ]
             ],
             'quantity' => [
@@ -258,13 +263,16 @@ class Admin extends BaseController
             // dd($validation);
             return redirect()->to('/admin/createfasilitas')->withInput()->with('validation', $validation);
         }
-        $this->fasilitasModel->save([
+
+        $data = [
             'nama_barang' => $this->request->getVar('nama_barang'),
             'id_lab' => $this->request->getVar('id_lab'),
             'quantity' => $this->request->getVar('quantity')
-        ]);
+        ];
+        // dd($data);
+        $this->fasilitasModel->save($data);
 
-        session()->setFlashdata('pesan', 'data berhasil ditambahkan');
+        session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
         return redirect()->to('/admin/managefasilitas');
     }
 
@@ -274,11 +282,11 @@ class Admin extends BaseController
         $data = [
             'title' => 'Management Lab | Edit Fasilitas',
             'validation' => \Config\Services::validation(),
-            'list' => $this->fasilitasModel->getWhere(['id_barang' => $id])->getResultArray(),
+            'list' => $this->fasilitasModel->getFasilitas()->where('id_barang', $id)->first(),
             'list_lab' => $this->labModel->findAll(),
             'nav' => 'fasilitas',
         ];
-        dd($data);
+        // dd($data);
         return view('admin/fasilitas/edit', $data);
     }
 
@@ -290,12 +298,6 @@ class Admin extends BaseController
                 'errors' => [
                     'required' => '{field} harus diisi',
                     'min_length' => '{field} minimal 3 huruf'
-                ]
-            ],
-            'id_lab' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi',
                 ]
             ],
             'quantity' => [
@@ -316,11 +318,20 @@ class Admin extends BaseController
             'id_lab' => $this->request->getVar('id_lab'),
             'quantity' => $this->request->getVar('quantity')
         ];
+        // dd($data);
 
         $this->fasilitasModel->save($data);
 
         session()->setFlashdata('pesan', 'data berhasil diubah');
         return redirect()->to('/admin/detailfasilitas/' . $id);
+    }
+
+    public function deletefasilitas($id)
+    {
+        // $this->labModel->where('id_lab', $id)->delete();
+        $this->fasilitasModel->delete($id);
+        session()->setFlashdata('pesan', 'data berhasil dihapus');
+        return redirect()->to('/admin/managefasilitas');
     }
 
     public function managereservasi()
