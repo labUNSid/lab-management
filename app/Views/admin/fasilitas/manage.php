@@ -5,16 +5,6 @@
 
 <h1>Daftar Fasilitas</h1>
 <a href="/admin/createfasilitas" class="btn btn-success mb-2"><i style="width:18px;height:18px;" class="me-1" data-feather="plus"></i>Tambah Fasilitas</a>
-<?php if (session()->getFlashdata('pesan')) : ?>
-    <div class="col-4">
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <div class="alert-message">
-                <?= session()->getFlashdata('pesan'); ?>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
 <table class="table table-striped">
     <thead>
         <tr>

@@ -23,7 +23,13 @@ class User extends BaseController
 
     public function index()
     {
-        echo ('Selamat datang ' . session()->get('email'));
+        $data = [
+            'title' => 'Dahsboard | Manajemen Lab',
+            'nav' => '',
+            'listc' => $this->list_profile
+        ];
+        // dd($this->list_profile);
+        return view('member/index', $data);
         // echo get_cookie('key');
         // return view('user/dashboard');
     }
@@ -82,7 +88,7 @@ class User extends BaseController
         if ($this->request->getFile('avatar')->getName() != '') {
             $avatar = $this->request->getFile('avatar');
             $namaavatar = $avatar->getRandomName();
-            $avatar->move(ROOTPATH . 'public/img/', $namaavatar);
+            $avatar->move(ROOTPATH . 'public/img/profile', $namaavatar);
         } else {
             $namaavatar = 'default.jpg';
         }
@@ -97,9 +103,19 @@ class User extends BaseController
             'avatar' => $namaavatar,
             'is_active' => $this->request->getVar('is_active')
         ];
-        dd($data);
+        // dd($data);
         $this->userModel->save($data);
         session()->setFlashdata('pesan', 'data berhasil diubah');
         return redirect()->to('/user');
+    }
+
+    public function reservasi()
+    {
+        $data = [
+            'title' => 'Reservasi | Management Lab',
+            'nav' => 'reservasi',
+            'listc' => $this->list_profile
+        ];
+        return view('member/reservasi', $data);
     }
 }
