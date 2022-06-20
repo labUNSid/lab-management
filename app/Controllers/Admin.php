@@ -73,11 +73,12 @@ class Admin extends BaseController
             'id_user' => $id,
             'id_role' => $this->request->getVar('id_role'),
             'nama' => $this->request->getVar('nama'),
-            'username' => $this->request->getVar('username'),
             'id_user' => $this->request->getVar('role'),
             'password' => $this->request->getVar('password'),
             'member' => $this->request->getVar('member'),
             'avatar' => $this->request->getVar('avatar'),
+            'email' => $this->request->getVar('email'),
+            'is_active' => $this->request->getVar('is_active')
         ]);
 
         session()->setFlashdata('pesan', 'data berhasil diubah');
@@ -324,7 +325,7 @@ class Admin extends BaseController
 
         $this->fasilitasModel->save($data);
 
-        session()->setFlashdata('pesan', 'data berhasil diubah');
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
         return redirect()->to('/admin/detailfasilitas/' . $id);
     }
 
@@ -332,7 +333,7 @@ class Admin extends BaseController
     {
         // $this->labModel->where('id_lab', $id)->delete();
         $this->fasilitasModel->delete($id);
-        session()->setFlashdata('pesan', 'data berhasil dihapus');
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/admin/managefasilitas');
     }
 
@@ -359,6 +360,7 @@ class Admin extends BaseController
         ];
         // dd($data);
         $this->reservasiModel->save($data);
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
         return redirect()->to('/admin/managereservasi');
     }
 }
