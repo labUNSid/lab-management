@@ -8,16 +8,36 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             <tr>
-                                <td>Nama Lab</td>
-                                <td> <?= $list[0]['nama_lab'] ?></td>
+                                <td>ID Role</td>
+                                <td> <?= $list[0]['id_role'] ?></td>
                             </tr>
                             <tr>
-                                <td>Harga Lab</td>
+                                <td>Nama</td>
+                                <td> <?= $list[0]['nama'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td> <?= $list[0]['harga_lab'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td> <?= $list[0]['password'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Member</td>
+                                <td> <?= $list[0]['harga_lab'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Avatar</td>
+                                <td> <?= $list[0]['avatar'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Is Active</td>
                                 <td> <?= $list[0]['harga_lab'] ?></td>
                             </tr>
                         </table>
-                            <a href="/admin/editlab/<?= $list[0]['id_lab'] ?>" class="btn btn-primary">Edit</a>
-                            <a href="/admin/deletelab/<?= $list[0]['id_lab'] ?>" class="btn btn-danger">Hapus</a>
+                            <a href="/admin/edituser/<?= $list[0]['id_user'] ?>" class="btn btn-primary">Edit</a>
+                            <a href="/admin/deleteuser/<?= $list[0]['id_user'] ?>" class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>

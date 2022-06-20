@@ -1,34 +1,43 @@
+<?= $this->extend('template/admin/layout'); ?>
 
-<!--Main layout-->
+<?= $this->section('kontainer'); ?>
 
-    <div class="container pt-4">
-        <!-- Section: Main chart -->
-        <section class="mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <h2>Tambah Anggota</h2>
-                        <form action="/admin/updatelab" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <?php if (session()->getFlashdata('pesan')) : ?>
+                        <div class="alert alert-success text-center" role="alert">
+                        <?= session()->getFlashdata('pesan'); ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="card-body">
+                        
+                        <form action="/admin/updatelab/<?= $list[0]['id_lab'] ?>" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this);">
                             <?= csrf_field(); ?>
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline">
-                                        <label class="form-label" for="nama_lab">Nama lab</label>
-                                        <input type="text" id="nama_lab" name="nama_lab" value=" <?= $list[0]['nama_lab'] ?>" class="form-control" />
-                                    </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="nama_lab">Nama lab</label>
+                                    <input type="text" id="nama_lab" name="nama_lab" value="<?= $list[0]['nama_lab'] ?>" class="form-control <?= ($validation->hasError('nama_lab')) ? 'is-invalid' : ''; ?>"  value="<?= old('nama_lab'); ?>" />
+                                    <div class="invalid-feedback"><?= $validation->getError('nama_lab'); ?></div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-outline">
-                                        <label class="form-label" for="harga_lab">Harga lab</label>
-                                        <input type="text" id="harga_lab" name="harga_lab" value=" <?= $list[0]['harga_lab'] ?>"  class="form-control" />
-                                    </div>
+                                    <br>
+                                <div class="form-group">
+                                    <label class="form-label" for="harga_lab">Harga lab</label>
+                                    <input type="text" id="harga_lab" name="harga_lab" value="<?= $list[0]['harga_lab'] ?>" class="form-control" <?= ($validation->hasError('harga_lab')) ? 'is-invalid' : ''; ?>/>
                                 </div>
+                                    <br>
                                 <button type="submit" id="submit" class="btn btn-primary mb-4">Update Data</button>
-                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    
 
+<script>
+
+
+</script>
+
+<?php echo $this->endSection(); ?>
