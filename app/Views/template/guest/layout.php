@@ -24,7 +24,7 @@
 
 <body>
     <div class="wrapper">
-        <?= $this->include('template/member/navigasi'); ?>
+        <?= $this->include('template/guest/navigasi'); ?>
         <main class="content">
             <?= $this->renderSection('kontainer'); ?>
         </main>

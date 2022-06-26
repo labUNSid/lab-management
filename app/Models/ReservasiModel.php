@@ -17,7 +17,7 @@ class ReservasiModel extends Model
     protected $allowedFields    = ['id_user', 'id_lab', 'waktu_awal', 'waktu_akhir', 'is_accept'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -42,6 +42,14 @@ class ReservasiModel extends Model
 
     public function getData()
     {
-        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM `peminjaman_lab` JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab');
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.waktu_awal >= CURDATE()');
+    }
+    public function getDataUser($id)
+    {
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.id_user = ' . $id . ' AND peminjaman_lab.waktu_awal >= CURDATE()');
+    }
+    public function getDataDash($key)
+    {
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE laboratorium.id_lab = "' . $key . '"');
     }
 }
