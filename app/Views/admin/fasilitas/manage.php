@@ -5,7 +5,7 @@
 
 <h1>Daftar Fasilitas</h1>
 <a href="/admin/createfasilitas" class="btn btn-success mb-2"><i style="width:18px;height:18px;" class="me-1" data-feather="plus"></i>Tambah Fasilitas</a>
-<table class="table table-striped">
+<table id="example" class="table table-striped">
     <thead>
         <tr>
             <th scope="col">No</th>
@@ -13,7 +13,6 @@
             <th scope="col">Nama Lab</th>
             <th scope="col">Jumlah Barang</th>
             <th scope="col">Action</th>
-
         </tr>
     </thead>
     <tbody>

@@ -12,10 +12,10 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="/img/icon/ico.ico" />
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Manajemen LAB</title>
 
     <link href="/assets/css/app.css" rel="stylesheet">
@@ -41,9 +41,11 @@
         </footer>
     </div>
     </div>
-    <script src="/assets/js/app.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/js/admin.js"></script>
     <script>
         $(function() {
             <?php if (session()->has("pesan")) { ?>
@@ -53,25 +55,6 @@
                 })
             <?php } ?>
         });
-
-        $(document).on('click', '.btn-hapus', function(e) {
-            e.preventDefault();
-            const href = $(this).attr('href');
-
-            Swal.fire({
-                title: 'Yakin Untuk menghapus?',
-                text: "Data yang dihapus tidak bisa dikembalikan!!!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus'
-            }).then((result) => {
-                if (result.value) {
-                    document.location.href = href;
-                }
-            })
-        })
     </script>
 </body>
 
