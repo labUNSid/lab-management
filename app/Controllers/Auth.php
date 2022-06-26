@@ -35,24 +35,32 @@ class Auth extends BaseController
             if ($dataUser['is_active'] == 1) {
                 if ($password == $dataUser['password']) {
                     session()->set([
-                        // 'email' => $dataUser['email'],
+                        'email' => $dataUser['email'],
                         'nama' => $dataUser['nama'],
-                        'member' => $dataUser['member'],
+                        'id' => $dataUser['id_user'],
                         'id_role' => $dataUser['id_role'],
                     ]);
+
                     // return redirect()->to('/user');
                     // dd(session()->get());
+                    if ($dataUser['id_role'] == 1) {
+                        return redirect()->to('/admin');
+                    }
+                    if ($dataUser['id_role'] == 2) {
+                        return redirect()->to('/user');
+                    }
                     echo ('Selamat datang ' . session()->get('nama'));
                 } else {
-                    session()->setFlashdata('pesan', 'password yang dimasukkan salah');
+                    session()->setFlashdata('pesan', 'Email atau Password yang dimasukkan salah');
                     return redirect()->to('/auth');
                 }
             } else {
-                session()->setFlashdata('pesan', 'email belum diverivikasi');
+                session()->setFlashdata('pesan', 'Email belum diverivikasi');
+                // echo ('belum verifikasi');
                 return redirect()->to('/auth');
             }
         } else {
-            session()->setFlashdata('pesan', 'email tidak ditemukan');
+            session()->setFlashdata('pesan', 'Email tidak ditemukan');
             return redirect()->to('/auth');
         }
     }
@@ -108,7 +116,7 @@ class Auth extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
-            return redirect()->to('/auth')->withInput()->with('validation', $validation);
+            return redirect()->to('/auth/signup')->withInput()->with('validation', $validation);
         }
 
         $namaAvatar = 'default.jpg';
@@ -120,20 +128,24 @@ class Auth extends BaseController
         $role = 2;
 
         //default aktivasi email semantara true
-        $activation = 1;
+        $activation = 0;
 
         // dd($this->request->getVar());
 
         //upload ke database
-        $this->userModel->save([
+        $data = [
             'id_role' => $role,
             'nama' => $this->request->getVar('nama'),
             'email' => $this->request->getVar('email'),
             'password' => sha1($this->request->getVar('password')),
             'member' => $member,
-            'avatar' => $namaAvatar,
             'is_active' => $activation,
-        ]);
+            'avatar' => $namaAvatar,
+        ];
+
+        $this->userModel->save($data);
+
+        // $this->sendEmail();
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
 
@@ -143,6 +155,6 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
-        echo ('pintu keluar');
+        return redirect()->to('/');
     }
 }
