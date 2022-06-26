@@ -13,21 +13,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="/img/icon/ico.ico" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Manajemen LAB</title>
 
     <link href="/assets/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- datatables -->
-  <link href=" <?= base_url('datatables/datatables.min.css'); ?> " />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
 </head>
 
 <body>
     <div class="wrapper">
-        <?= $this->include('template/admin/navigasi'); ?>
+        <?= $this->include('template/guest/navigasi'); ?>
         <main class="content">
             <?= $this->renderSection('kontainer'); ?>
         </main>
@@ -44,11 +41,11 @@
         </footer>
     </div>
     </div>
+    <script src="/assets/js/app.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script src="/assets/js/app.js"></script>
-    <script src="/js/admin.js"></script>
+    <script src="/js/user.js"></script>
     <script>
         $(function() {
             <?php if (session()->has("pesan")) { ?>
@@ -58,7 +55,6 @@
                 })
             <?php } ?>
         });
-
     </script>
 </body>
 

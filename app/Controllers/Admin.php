@@ -24,10 +24,29 @@ class Admin extends BaseController
 
     public function index()
     {
-        // echo ('Selamat datang ' . session()->get('nama'));
+        $reservasi = $this->reservasiModel->getData()->getResultArray();
+
         $data = [
-            'title' => 'Management Lab | Manage User',
+            'title' => 'Dahsboard | Manajemen Lab',
             'nav' => 'dash',
+            'list_lab' => $this->labModel->findAll(),
+            'list_reservasi' => $reservasi,
+            'tabs' => 'all',
+        ];
+        // dd($data);
+        return view('admin/index', $data);
+    }
+
+    public function detailtampil($key)
+    {
+        $reservasi = $this->reservasiModel->getDataDash($key)->getResultArray();
+
+        $data = [
+            'title' => 'Dahsboard | Manajemen Lab',
+            'nav' => 'dash',
+            'list_lab' => $this->labModel->findAll(),
+            'list_reservasi' => $reservasi,
+            'tabs' => $key,
         ];
         // dd($data);
         return view('admin/index', $data);
@@ -85,6 +104,13 @@ class Admin extends BaseController
         return redirect()->to('/admin/detailuser/' . $id);
     }
 
+    public function deleteuser($id)
+    {
+        $this->userModel->delete($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
+        return redirect()->to('/admin/manageuser');
+    }
+
     public function managelab()
     {
         $data = [
@@ -94,7 +120,7 @@ class Admin extends BaseController
         ];
         // dd($data);
 
-        return view('admin/lab/managelab', $data);
+        return view('admin/lab/manage', $data);
     }
 
     public function createlab()
@@ -361,6 +387,13 @@ class Admin extends BaseController
         // dd($data);
         $this->reservasiModel->save($data);
         session()->setFlashdata('pesan', 'Data berhasil diubah');
+        return redirect()->to('/admin/managereservasi');
+    }
+
+    public function deletereservasi($id)
+    {
+        $this->reservasiModel->delete($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/admin/managereservasi');
     }
 }
