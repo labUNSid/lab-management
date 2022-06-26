@@ -5,6 +5,7 @@
 
 <h1>Daftar Fasilitas</h1>
 <a href="/admin/createfasilitas" class="btn btn-success mb-2"><i style="width:18px;height:18px;" class="me-1" data-feather="plus"></i>Tambah Fasilitas</a>
+
 <table id="example" class="table table-striped">
     <thead>
         <tr>
@@ -20,7 +21,7 @@
         $no = 1;
         foreach ($list as $item) { ?>
             <tr>
-                <th scope="row"><?= $no++; ?></th>
+                <td><?= $no++; ?></td>
                 <td><?= $item['nama_barang'] ?></td>
                 <td><?= $item['nama_lab'] ?></td>
                 <td><?= $item['quantity'] ?></td>
@@ -31,4 +32,8 @@
         <?php } ?>
     </tbody>
 </table>
+
+
+    
 <?php echo $this->endSection(); ?>
+

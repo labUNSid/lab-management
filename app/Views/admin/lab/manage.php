@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
 
 <?= $this->extend('template/admin/layout'); ?>
 
 <?= $this->section('kontainer'); ?>
-<h1> Laboratorium </h1>
-<a href="/admin/createlab" id="tambah" class="btn btn-rounded btn-success mb-3">Tambah Lab</a>
+<h1> Daftar Laboratorium </h1>
+<a href="/admin/createlab" id="tambah" class="btn btn-rounded btn-success mb-3" >Tambah Lab</a>
 
-<table id="datatable" class="table">
+<table id="datalab">
     <thead>
         <tr>
             <th>No</th>
-            <th>Harga Lab</th>
             <th>Nama Lab</th>
+            <th>Harga Lab</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -35,7 +33,3 @@
 
 
 <?php echo $this->endSection(); ?>
-
-</body>
-</html>
-

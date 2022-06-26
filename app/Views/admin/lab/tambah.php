@@ -1,15 +1,13 @@
 <?= $this->extend('template/admin/layout'); ?>
 
 <?= $this->section('kontainer'); ?>
-            <div class="card">
-                <div class="card-header py-3">
-                    <h2>Tambah Lab</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
+        <div class = "row">
+            <div class="col-6">
+            <h1>Tambah Lab</h1>
+                <div class="card">
+                    <div class="card-body">
                         <form action="/admin/savelab" method="post">
                             <?= csrf_field(); ?>
-                            <div class="row mb-8">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label" for="nl">Nama Lab</label>
@@ -24,10 +22,7 @@
                                     <br>
                                     <button type="submit" class="btn btn-primary mb-4">Tambah Data</button>
                                 </div>
-                                
-                            </div>
                         </form>
                     </div>
                 </div>
-            </div>
             <?php echo $this->endSection(); ?>

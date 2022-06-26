@@ -7,6 +7,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+
                 <table id="example" class="table table-striped">
                     <thead>
                         <th>No</th>
