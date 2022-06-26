@@ -4,20 +4,19 @@
 <?= $this->extend('template/admin/layout'); ?>
 
 <?= $this->section('kontainer'); ?>
-<h1> User </h1>
-<a href="/admin/createuser" id="tambah" class="btn btn-rounded btn-success mb-3">Tambah Lab</a>
+<h1>Daftar User</h1>
 
-<table id="datatable" class="table">
+<table id="datauser">
     <thead>
         <tr>
             <th>No</th>
             <th>ID Role</th>
             <th>Nama</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Member</th>
             <th>Avatar</th>
-            <th>Is Active</th>
+            <th>Aktivasi</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -29,13 +28,11 @@
                 <td><?= $item['id_role'] ?></td>
                 <td><?= $item['nama'] ?></td>
                 <td><?= $item['email'] ?></td>
-                <td><?= $item['password'] ?></td>
                 <td><?= $item['member'] ?></td>
-                <td><?= $item['avatar'] ?></td>
-                <td><?= $item['is_active'] ?></td>
+                <td> <img src="/img/profile/<?= $item['avatar']; ?>" class="img-rounded" alt="Responsive image" width="75"> </td>
+                <td> <?= ($item['is_active'] == '0' ? 'Belum Tervirifikasi' : 'Terverifikasi'); ?></td>
                 <td>
                     <a href="/admin/detailuser/<?=$item['id_user']?>" class="btn btn-success">Detail</a>
-                    
                 </td>
             </tr>
         <?php } ?>

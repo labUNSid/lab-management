@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table class="table table-striped text-center">
+                <table id="datareservasi">
                     <thead>
                         <th>No</th>
                         <th>Nama Peminjam</th>

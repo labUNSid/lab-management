@@ -20,6 +20,9 @@
 
     <link href="/assets/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- datatables -->
+  <link href=" <?= base_url('datatables/datatables.min.css'); ?> " />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
 </head>
 
 <body>
@@ -44,6 +47,9 @@
     <script src="/assets/js/app.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- datatables -->
+    <script src=" <?= base_url('datatables/datatables.min.js'); ?> "></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script>
         $(function() {
             <?php if (session()->has("pesan")) { ?>
@@ -72,6 +78,25 @@
                 }
             })
         })
+
+      
+        $(document).ready(function() {
+            $('#datafasilitas').DataTable();
+            });
+        
+        $(document).ready(function() {
+            $('#datalab').DataTable();
+            });
+
+        $(document).ready(function() {
+            $('#datauser').DataTable();
+            });
+
+        $(document).ready(function() {
+            $('#datareservasi').DataTable();
+            });
+            
+
     </script>
 </body>
 
