@@ -4,11 +4,11 @@
 <h1>Manage Reservasi</h1>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col">
         <div class="card">
             <div class="card-body">
 
-                <table id="example" class="table table-striped">
+                <table id="tampilres" class="table table-striped">
                     <thead>
                         <th>No</th>
                         <th>Nama Peminjam</th>

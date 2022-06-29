@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="/admin">
+        <a class="sidebar-brand" href="/user">
             <span class="align-middle">Manajemen LAB</span>
         </a>
 

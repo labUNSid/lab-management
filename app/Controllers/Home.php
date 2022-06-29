@@ -11,6 +11,7 @@ class Home extends BaseController
     {
         $this->labModel = new LaboratoriumModel();
         $this->reservasiModel = new ReservasiModel();
+        // dd(session()->sesi);
     }
 
     public function index()
