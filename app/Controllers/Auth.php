@@ -27,9 +27,16 @@ class Auth extends BaseController
     {
         $email = $this->request->getVar('email');
         $password = sha1($this->request->getVar('password'));
+        $remem = $this->request->getVar('rememberme');
         $dataUser = $this->userModel->where(['email' => $email])->first();
-
-        // dd($dataUser);
+        // dd($remem);
+        if (isset($remem)) {
+            $nama = 'email';
+            $nilai = $dataUser['email'];
+            $durasi = strtotime('+2 days');
+            $path = '/';
+            setcookie($nama, $nilai, $durasi, $path);
+        }
 
         if ($dataUser) {
             if ($dataUser['is_active'] == 1) {
@@ -99,10 +106,10 @@ class Auth extends BaseController
             ],
 
             'password' => [
-                'rules' => 'required|min_length[4]|max_length[20]',
+                'rules' => 'required|min_length[8]|max_length[20]',
                 'errors' => [
                     'required' => '{field} harus diisi',
-                    'min_length' => '{field} minimal 4 karakter',
+                    'min_length' => '{field} minimal 8 karakter',
                     'max_length' => '{field} maksimal 20 karakter'
                 ]
             ],
@@ -155,6 +162,11 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
+        $nama = 'email';
+        $nilai = '';
+        $durasi = strtotime('-7 days');
+        $path = '/';
+        setcookie($nama, $nilai, $durasi, $path);
         return redirect()->to('/');
     }
 }

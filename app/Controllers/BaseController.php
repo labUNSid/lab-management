@@ -9,6 +9,8 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+use App\Models\UserModel;
+
 /**
  * Class BaseController
  *
@@ -35,7 +37,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['cookie'];
 
     /**
      * Constructor.
@@ -49,5 +51,26 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
         session();
+
+        $cookie = get_cookie('email');
+        if (isset($cookie)) {
+            $userModel = new UserModel();
+            $dataUser = $userModel->where(['email' => $cookie])->first();
+            $sesi = [
+                'email' => $dataUser['email'],
+                'nama' => $dataUser['nama'],
+                'id' => $dataUser['id_user'],
+                'id_role' => $dataUser['id_role'],
+            ];
+            session()->set($sesi);
+        }
+        if (isset($dataUser['id_role'])) {
+            if ($dataUser['id_role'] == 1) {
+                return redirect()->to('/admin');
+            }
+            if ($dataUser['id_role'] == 2) {
+                return redirect()->to('/user');
+            }
+        }
     }
 }

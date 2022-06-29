@@ -29,14 +29,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="tanggal" class="form-label">Jam Awal</label>
-                        <input type="time" min="07:00" max="16:00" step="3600" class="form-control <?= ($validation->hasError('jam_awal')) ? 'is-invalid' : ''; ?>" name="jam_awal">
+                        <input type="time" min="07:00" max="20:00" step="3600" class="form-control <?= ($validation->hasError('jam_awal')) ? 'is-invalid' : ''; ?>" name="jam_awal">
                         <div class="invalid-feedback">
                             <?= $validation->getError('jam_awal'); ?>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal" class="form-label">Jam Akhir</label>
-                        <input type="time" min="08:00" max="17:00" step="3600" class="form-control <?= ($validation->hasError('jam_akhir')) ? 'is-invalid' : ''; ?>" name="jam_akhir">
+                        <input type="time" min="08:00" max="21:00" step="3600" class="form-control <?= ($validation->hasError('jam_akhir')) ? 'is-invalid' : ''; ?>" name="jam_akhir">
                         <div class="invalid-feedback">
                             <?= $validation->getError('jam_akhir'); ?>
                         </div>

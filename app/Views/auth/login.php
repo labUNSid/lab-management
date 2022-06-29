@@ -21,7 +21,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="#" class="h1"><b>Lab</b>PTIK</a><br>
+        <a href="#" class="h1"><b>Lab</b>UNS</a><br>
       </div>
       <div class="card-body">
         <?php if (session()->getFlashdata('pesan')) : ?>
@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" id="remember">
+                <input type="checkbox" id="remember" name="rememberme">
                 <label for="remember">
                   Remember Me
                 </label>
@@ -63,9 +63,6 @@
           </div>
         </form>
 
-        <p class="mb-1">
-          <a href="forgot_password.php">I forgot my password</a>
-        </p>
         <p class="mb-0">
           <a href="/auth/signup" class="text-center">Register a new membership</a>
         </p>

@@ -61,19 +61,22 @@ class User extends BaseController
     {
 
         $data = [
-            'list' => $this->list_profile,
+            'listc' => $this->list_profile,
+            'nav' => 'profile'
         ];
-        dd($data);
+        // dd($data);
+        return view('member/profile', $data);
     }
 
     public function edit()
     {
         $data = [
-            'list' => $this->list_profile,
+            'listc' => $this->list_profile,
+            'nav' => 'profile',
             'validation' => \Config\Services::validation(),
         ];
         // dd($data);
-        return view('user/edit_profile', $data);
+        return view('member/edit_profile', $data);
     }
 
     public function update()
@@ -107,13 +110,13 @@ class User extends BaseController
         }
 
         // dd($this->request->getFile('avatar'));
+        $fileavatar =  $this->request->getFile('avatar');
 
-        if ($this->request->getFile('avatar')->getName() != '') {
-            $avatar = $this->request->getFile('avatar');
-            $namaavatar = $avatar->getRandomName();
-            $avatar->move(ROOTPATH . 'public/img/profile', $namaavatar);
+        if ($fileavatar->getError() == 4) {
+            $namaavatar = $this->request->getVar('avatar_lama');
         } else {
-            $namaavatar = 'default.jpg';
+            $namaavatar = $fileavatar->getRandomName();
+            $fileavatar->move(ROOTPATH . 'public/img/profile', $namaavatar);
         }
 
         $data = [
@@ -141,7 +144,7 @@ class User extends BaseController
             'list_reservasi' => $this->reservasiModel->getDataUser($id)->getResultArray(),
             'listc' => $this->list_profile
         ];
-        // dd($id);
+        // dd($data);
         return view('member/reservasi/index', $data);
     }
 
