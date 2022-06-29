@@ -42,14 +42,18 @@ class ReservasiModel extends Model
 
     public function getData()
     {
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.waktu_awal >= CURDATE() AND peminjaman_lab.is_accept = "1"');
+    }
+    public function getDataAdmin()
+    {
         return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.waktu_awal >= CURDATE()');
     }
     public function getDataUser($id)
     {
-        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.id_user = ' . $id . ' AND peminjaman_lab.waktu_awal >= CURDATE()');
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, laboratorium.harga_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.id_user = ' . $id . ' AND peminjaman_lab.waktu_awal >= CURDATE()');
     }
     public function getDataDash($key)
     {
-        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE laboratorium.id_lab = "' . $key . '"');
+        return $this->query('SELECT peminjaman_lab.*, laboratorium.nama_lab, user.nama FROM peminjaman_lab JOIN user ON user.id_user = peminjaman_lab.id_user JOIN laboratorium ON laboratorium.id_lab = peminjaman_lab.id_lab WHERE peminjaman_lab.waktu_awal >= CURDATE() AND peminjaman_lab.is_accept = "1" AND laboratorium.id_lab = "' . $key . '"');
     }
 }

@@ -4,6 +4,7 @@
 
         <div class="row">
             <div class="col-6">
+            <h1>Detail Lab</h1>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-striped">
@@ -17,7 +18,7 @@
                             </tr>
                         </table>
                             <a href="/admin/editlab/<?= $list[0]['id_lab'] ?>" class="btn btn-primary">Edit</a>
-                            <a href="/admin/deletelab/<?= $list[0]['id_lab'] ?>" class="btn btn-danger">Hapus</a>
+                            <a href="/admin/deletelab/<?= $list[0]['id_lab'] ?>" class="btn btn-danger btn-hapus">Hapus</a>
                     </div>
                 </div>
             </div>

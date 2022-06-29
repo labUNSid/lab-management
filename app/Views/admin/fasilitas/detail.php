@@ -18,7 +18,7 @@
                         <td><?= $list['nama_barang']; ?></td>
                     </tr>
                     <tr>
-                        <td>Nama Lab</td>
+                        <td>Jumlah Barang</td>
                         <td><?= $list['quantity']; ?></td>
                     </tr>
                 </table>

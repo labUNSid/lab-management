@@ -20,6 +20,9 @@
 
     <link href="/assets/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- datatables -->
+  <link href=" <?= base_url('datatables/datatables.min.css'); ?> " />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
 </head>
 
 <body>
@@ -55,6 +58,7 @@
                 })
             <?php } ?>
         });
+
     </script>
 </body>
 

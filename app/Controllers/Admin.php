@@ -68,7 +68,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Management Lab | Detail User',
-            'list' => $this->userModel->getWhere(['id_user' => $id])->getResultArray(),
+            'list' => $this->userModel->join('role_user', 'role_user.id_role=user.id_role')->getWhere(['id_user' => $id])->getResultArray(),
             'nav' => 'user',
         ];
         // dd($data);
@@ -83,22 +83,24 @@ class Admin extends BaseController
             'list' => $this->userModel->getWhere(['id_user' => $id])->getResultArray(),
             'nav' => 'user',
         ];
+        // dd($data);
         return view('/admin/user/edit', $data);
     }
 
     public function updateuser($id)
     {
-        $this->userModel->save([
+        $data = [
             'id_user' => $id,
             'id_role' => $this->request->getVar('id_role'),
             'nama' => $this->request->getVar('nama'),
-            'id_user' => $this->request->getVar('role'),
             'password' => $this->request->getVar('password'),
             'member' => $this->request->getVar('member'),
             'avatar' => $this->request->getVar('avatar'),
             'email' => $this->request->getVar('email'),
             'is_active' => $this->request->getVar('is_active')
-        ]);
+        ];
+        // dd($data);
+        $this->userModel->save($data);
 
         session()->setFlashdata('pesan', 'data berhasil diubah');
         return redirect()->to('/admin/detailuser/' . $id);
@@ -367,7 +369,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Management Lab | Edit Fasilitas',
-            'list' => $this->reservasiModel->getData()->getResultArray(),
+            'list' => $this->reservasiModel->getDataAdmin()->getResultArray(),
             'nav' => 'reservasi',
         ];
         // dd($data);

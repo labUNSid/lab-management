@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="/admin">
+        <a class="sidebar-brand" href="/user">
             <span class="align-middle">Manajemen LAB</span>
         </a>
 
@@ -23,7 +23,7 @@
             <li class="sidebar-header">
                 Profile
             </li>
-            <li class="sidebar-item <?= ($nav == 'user' ? 'active' : ''); ?>">
+            <li class="sidebar-item <?= ($nav == 'profile' ? 'active' : ''); ?>">
                 <a class="sidebar-link" href="/user/profile">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">User</span>
                 </a>
@@ -51,7 +51,7 @@
                         <img src="/img/profile/<?= $listc[0]['avatar']; ?>" class="avatar img-fluid rounded me-1" /><span class="text-dark"><?= ucfirst(session()->get('nama')); ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="/user/edit"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                        <a class="dropdown-item" href="/user/profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/auth/logout"><i class="align-middle me-1" data-feather="log-out"></i>Log out</a>
                     </div>
