@@ -12,7 +12,7 @@
                     <?php
                     foreach ($list_lab as $list) { ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($tabs == $list['id_lab'] ? 'active' : ''); ?>" href="user/detailtampil/<?= $list['id_lab']; ?>"><?= $list['nama_lab']; ?></a>
+                            <a class="nav-link <?= ($tabs == $list['id_lab'] ? 'active' : ''); ?>" href="/user/detailtampil/<?= $list['id_lab']; ?>"><?= $list['nama_lab']; ?></a>
                         </li>
                     <?php } ?>
                 </ul>

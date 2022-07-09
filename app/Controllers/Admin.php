@@ -398,4 +398,16 @@ class Admin extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/admin/managereservasi');
     }
+
+    public function chartreservasi()
+    {
+        $data = [
+            'title' => 'Management Lab | Edit Fasilitas',
+            'nav' => 'creservasi',
+            'list_lab' => $this->labModel->findAll()
+        ];
+
+
+        return view('admin/chart/reservasi', $data);
+    }
 }

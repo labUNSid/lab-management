@@ -103,10 +103,16 @@ class User extends BaseController
                     'is_unique' => '{field} sudah terdaftar',
                 ]
             ],
+            'avatar' => [
+                'rules' => 'is_image[avatar]|max_size[avatar.2048]',
+                'errors' => [
+                    'is_image' => 'file bukan gambar'
+                ]
+            ]
         ])) {
             $validation = \Config\Services::validation();
             // dd($validation);
-            return redirect()->to('/user/edit/')->withInput()->with('validation', $validation);
+            return redirect()->to('/user/edit')->withInput()->with('validation', $validation);
         }
 
         // dd($this->request->getFile('avatar'));
@@ -116,8 +122,13 @@ class User extends BaseController
             $namaavatar = $this->request->getVar('avatar_lama');
         } else {
             $namaavatar = $fileavatar->getRandomName();
-            $fileavatar->move(ROOTPATH . 'public/img/profile', $namaavatar);
+            $fileavatar->move('img/profile', $namaavatar);
+
+            if ($namaavatar != 'default.jpg') {
+                unlink('img/profile/' . $this->request->getVar('avatar_lama'));
+            }
         }
+
 
         $data = [
             'id_user' => $this->request->getVar('id_user'),
@@ -163,13 +174,6 @@ class User extends BaseController
 
     public function savereservasi()
     {
-        // merge kemudian jadikan unix kemudian datetime sql
-        // $tanggal = "2022-06-23";
-        // $waktu1 = "20:00";
-        // $dt = $tanggal . " " . $waktu1;
-
-        // $date = strtotime($dt);
-        // echo date("Y-m-d H:i:s", $date);
 
         if (!$this->validate([
             'id_lab' => [

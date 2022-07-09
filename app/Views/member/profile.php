@@ -9,7 +9,7 @@
             <div class="card-body">
                 <!-- isi nya -->
                 <div class="text-center">
-                    <img src="/img/profile/<?= $listc[0]['avatar']; ?>" class="img-rounded" alt="Responsive image" width="200">         
+                    <img src="/img/profile/<?= $listc[0]['avatar']; ?>" class="img-rounded" alt="Responsive image" width="200">
                 </div>
                 <br>
                 <table class="table table-striped">
@@ -22,7 +22,7 @@
                         <td><?= $listc[0]['email']; ?></td>
                     </tr>
                 </table>
-                <a href="/user/edit/<?= $listc[0]['id_user'] ?>" class="btn btn-primary">Edit</a>
+                <a href="/user/edit" class="btn btn-primary">Edit</a>
             </div>
         </div>
     </div>
